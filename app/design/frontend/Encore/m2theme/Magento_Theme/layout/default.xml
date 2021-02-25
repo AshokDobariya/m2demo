@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Html\Links" name="header.links">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">header links</argument>
+                </arguments>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="my-link1">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Checkout</argument>
+                        <argument name="path" xsi:type="string">checkout</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="my-link">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">My Cart</argument>
+                        <argument name="path" xsi:type="string">checkout/cart</argument>
+                    </arguments>
+                </block>
+            </block>
+            <referenceBlock name="custom_header">
+                <block class="Magento\Directory\Block\Currency" name="currency" before="-" template="currency.phtml"/>
+            </referenceBlock>
+        </referenceContainer>
+        <referenceContainer name="header.panel">
+            <block class="Magento\Cms\Block\Block" name="header-top" before="-">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">header-top</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_img_width" xsi:type="number">148</argument>
+                <argument name="logo_img_height" xsi:type="number">43</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="catalog.topnav">
+           <block class="Magento\Framework\View\Element\Html\Link\Current" name="home.link" before="-">
+                <arguments>
+                    <argument name="label" xsi:type="string">Home</argument>
+                    <argument name="path" xsi:type="string">home/</argument>
+                </arguments>
+          </block>
+          <block class="Magento\Framework\View\Element\Html\Link\Current" name="blog.link">
+                <arguments>
+                    <argument name="label" xsi:type="string">Blog</argument>
+                    <argument name="path" xsi:type="string">blog/</argument>
+                </arguments>
+          </block> 
+          <block class="Magento\Framework\View\Element\Html\Link\Current" name="404.link">
+                <arguments>
+                    <argument name="label" xsi:type="string">404</argument>
+                    <argument name="path" xsi:type="string">404/</argument>
+                </arguments>
+          </block>
+          <block class="Magento\Framework\View\Element\Html\Link\Current" name="contact.link">
+                <arguments>
+                    <argument name="label" xsi:type="string">Contact</argument>
+                    <argument name="path" xsi:type="string">contact/</argument>
+                </arguments>
+          </block> 
+       </referenceContainer>
+
+        <referenceContainer name="header.panel">
+            <!-- <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" template="Magento_Store::switch/stores.phtml"/> -->
+            <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" template="Magento_Store::switch/stores.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="header" remove="true"/>
+        <referenceBlock  name="register-link" remove="true"/>
+        <referenceBlock name="catalog.compare.link" remove="true"/>
+        <referenceBlock name="minicart" remove="true"/>
+        <!-- <referenceBlock name="top.search" remove="true"/> -->
+        <move element="copyright" destination="before.body.end"/>
+        <move element="my-account-link" destination="header.links" before="-"/>
+        <move element="wish-list-link" destination="header.links" after="my-account-link"/>
+        <move element="my-link1" destination="header.links" after="wish-list-link"/>
+        <move element="my-link" destination="header.links" after="my-link1"/>
+        <move element="top.search" destination="catalog.topnav" after="-"/>
+        <move element="store_language" destination="header-wrapper" before="header.links"/>
+    </body>
+</page>
